@@ -18,17 +18,7 @@ class TicTacToe
         ] 
         
         
-        def current_player
-    turn_count % 2 == 0 ? "X" : "O"
-  end  
-  
-  
-  
-  def turn_count
-    @board.count{|token| token == "X" || token == "O"}
-  end  
-  
-  def display_board
+ def display_board
     puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
     puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
@@ -36,17 +26,13 @@ class TicTacToe
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end  
   
-  
-  
-  def input_to_index(input)
+   def input_to_index(input)
     number = input.to_i
     number -= 1
     number  
     
-    end  
-    
-    
-    def move (index, token = "X")
+    end          
+        def move (index, token = "X")
     @board[index] = token
   end  
   
@@ -73,30 +59,21 @@ class TicTacToe
     else
       turn
     end
+  end     
+  
+  
+    def turn_count
+    @board.count{|token| token == "X" || token == "O"}
+  end  
+  
+        def current_player
+    turn_count % 2 == 0 ? "X" : "O"
   end  
   
   
-  def play
-    until over?
-    turn
-    end
-    if over?
-      if draw?
-        puts "Cat's Game!"
-      end
-      if won?
-        winner
-        puts "Congratulations #{@winner}!"
-      end
-    end
-  end  
+ 
   
-  
-  def over?
-    won? || draw?
-  end  
-  
-  def won?
+    def won?
     WIN_COMBINATIONS.each do |combo|
       windex0 = combo[0]
       windex1 = combo[1]
@@ -119,9 +96,28 @@ class TicTacToe
     !won? && full?
   end
   
+  def over?
+    won? || draw?
+  end  
+  
   def winner
     if won?
        @winner = turn_count % 2 == 0 ? "O" : "X"
     end
-  end
-end
+  end 
+  
+  def play
+    until over?
+    turn
+    end
+    if over?
+      if draw?
+        puts "Cat's Game!"
+      end
+      if won?
+        winner
+        puts "Congratulations #{@winner}!"
+      end
+    end
+  end  
+end 
